@@ -2,26 +2,28 @@
 import { useEffect, useState } from "react";
 import { Play } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
+
 interface BannerType {
     title: String;
     src: String;
     desc: String;
     link: String;
     platform: String
+    id: number;
 }
 
 
 const bannerImageVariants = {
-    hidden: { opacity: 0  },
+    hidden: { opacity: 0 },
     visible: {
-        opacity: 1 ,
+        opacity: 1,
         transition: {
             duration: 0.3,
             ease: [0.25, 1, 0.5, 1] as [number, number, number, number]
         },
     },
     exit: {
-        opacity: 0 ,
+        opacity: 0,
         transition: {
             duration: 0.3,
             ease: [0.6, -0.05, 0.01, 0.99] as [number, number, number, number],
@@ -38,15 +40,16 @@ const HeroBanner = () => {
             src: "/src/assets/banner1.png",
             desc: "Naruto Shippuden, the sequel to the globally renowned Naruto series, is based on Masashi Kishimoto’s beloved manga. The series follows Naruto Uzumaki as a teenage ninja striving to protect his village and achieve his dream of becoming Hokage, the leader of the Hidden Leaf Village. With over 250 million copies of the Naruto manga sold worldwide and Naruto Shippuden running for over a decade, the series has become a cornerstone of anime culture praised for its action, complex characters, and emotional depth. Naruto Shippuden’s themes of redemption, sacrifice, and perseverance explore how the bonds of friendship can defeat the most powerful enemies. Naruto Shippuden ran for 22 seasons, from 2007 to 2017, bringing Naruto’s journey to its epic conclusion. Early seasons focus on the development of the Akatsuki storyline, and as the series progresses, larger threats emerge, including some of the most powerful foes in the ninja world. The final seasons of Naruto Shippuden bring closure to long-running storylines that define Naruto’s legacy as a hero in one of the most influential and enduring anime series of all time.",
             link: "https://www.crunchyroll.com/series/GYQ4MW246/naruto-shippuden",
-            platform: "crunchyroll"
-
+            platform: "crunchyroll",
+            id: 0
         },
         {
             title: "demon slayer",
             src: "/src/assets/banner2.png",
             desc: "It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.",
             link: "https://www.crunchyroll.com/series/GY5P48XEY/demon-slayer-kimetsu-no-yaiba",
-            platform: "crunchyroll"
+            platform: "crunchyroll",
+            id: 1
         }
         ,
         {
@@ -54,34 +57,43 @@ const HeroBanner = () => {
             src: "/src/assets/banner3.jpg",
             desc: "Once the greatest hitman of all, Taro Sakamoto retired in the name of love. But when his past catches up, he must fight to protect his beloved family.",
             link: "https://www.netflix.com/in/title/81663325#episodes",
-            platform: "netflix"
+            platform: "netflix",
+            id: 2
         }
     ]
 
 
     const [banner, setBanner] = useState<BannerType>(bannerSlider[0])
     const [bannerTitleshow, setbannerTitleshow] = useState(false)
+    const [isPaused, setIsPaused] = useState(false);
+
+    const handleToggleTitle = () => {
+        setbannerTitleshow((prev) => {
+            const newState = !prev;
+            setIsPaused(newState);
+            return newState;
+        });
+    };
+
 
 
     // Banner Changing function on component mounts
 
+
     useEffect(() => {
-        let currentIndex = 0
+        if (isPaused) return;
+
         const interval = setInterval(() => {
-            currentIndex = (++currentIndex) % bannerSlider.length
-            setBanner(bannerSlider[currentIndex]);
-            setbannerTitleshow(false)
+            setBanner((prev) => {
+                const currentIndex = prev.id;
+                const nextIndex = (currentIndex + 1) % bannerSlider.length;
+                return bannerSlider[nextIndex];
+            });
+            setbannerTitleshow(false);
+        }, 3000);
 
-        }, 2000);
-
-        console.log(banner.desc.length);
-
-
-
-
-
-        return () => clearInterval(interval)
-    }, [])
+        return () => clearInterval(interval);
+    }, [isPaused]);
 
 
 
@@ -107,7 +119,6 @@ const HeroBanner = () => {
                     {banner.title}
                 </h1>
                 <p className={`text-sm md:text-lg leading-snug text-center max-h-[8rem] ${bannerTitleshow ? "overflow-auto" : ""}`}>
-                    {/* {banner.desc.length > 200 ? `${banner.desc.slice(0,200)}...`: banner.desc} */}
                     {
                         bannerTitleshow ? banner.desc : banner.desc.length > 200 ? `${banner.desc.slice(0, 100)}...` : banner.desc
                     }
@@ -115,7 +126,7 @@ const HeroBanner = () => {
                     {banner.desc.length > 200 && (
                         <span
                             className="ml-2 text-primary underline cursor-pointer"
-                            onClick={() => setbannerTitleshow(!bannerTitleshow)}
+                            onClick={handleToggleTitle}
                         >
                             {bannerTitleshow ? "hide" : "more"}
                         </span>
