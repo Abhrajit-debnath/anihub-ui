@@ -8,7 +8,7 @@ function App() {
 
   return (
 
-    <div className="bg-background w-screen h-screen">
+    <div className="bg-background w-screen">
       <div className="w-[90%] m-auto">
         <SectionHeader/>
         <HeroBanner/>
