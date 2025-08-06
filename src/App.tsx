@@ -10,7 +10,7 @@ function App() {
 const [searchTerm, setsearchTerm] = useState("")
   return (
 
-    <div className="bg-background w-screen min-h-screen">
+    <div className="bg-background  min-h-screen">
       <div className="w-[90%] m-auto">
         <Navbar onSearch={setsearchTerm} />
         <HeroBanner />
