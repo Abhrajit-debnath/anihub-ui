@@ -4,17 +4,11 @@ A modern, responsive anime explorer built with **React.js** and **Tailwind CSS**
 
 ## 🌐 Live Demo
 
-[View the deployed app on Vercel](https://your-vercel-link.vercel.app)  
+[View the deployed app on Vercel](https://anihub-ui.vercel.app/)  
 *(replace the link above with your actual deployed URL)*
 
 ---
 
-## 📸 Screenshots
-
-![Hero Banner](./screenshots/hero.png)  
-*(Include screenshots from your app's main sections)*
-
----
 
 ## ✨ Features
 
