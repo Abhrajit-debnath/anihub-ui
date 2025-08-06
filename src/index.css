@@ -15,5 +15,7 @@
 
   --color-background: #0D0D0D;
   --color-primary: #f7561a;
-  --color-accent: #00FFD1
+  --color-accent: #00FFD1;
+
+  --breakpoint-xs: 25rem;
 }

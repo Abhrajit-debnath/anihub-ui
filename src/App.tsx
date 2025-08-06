@@ -1,18 +1,21 @@
 
+import { useState } from 'react'
 import './App.css'
 import AnimeSection from './components/AnimeSection'
 import HeroBanner from './components/HeroBanner'
-import SectionHeader from './components/SectionHeader'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function App() {
-
+const [searchTerm, setsearchTerm] = useState("")
   return (
 
-    <div className="bg-background w-screen">
+    <div className="bg-background w-screen min-h-screen">
       <div className="w-[90%] m-auto">
-        <SectionHeader/>
-        <HeroBanner/>
-        <AnimeSection/>
+        <Navbar onSearch={setsearchTerm} />
+        <HeroBanner />
+        <AnimeSection searchTerm={searchTerm}/>
+        <Footer/>
       </div>
     </div>
 
