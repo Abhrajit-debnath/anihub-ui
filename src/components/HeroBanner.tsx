@@ -150,7 +150,7 @@ import useWindowSize from './hooks/useWindowSize'
 
 interface BannerType {
     title: string;
-    src: string;
+    path: string;
     desc: string;
     link: string;
     platform: string;
@@ -178,7 +178,7 @@ const bannerImageVariants = {
 const bannerSlider: BannerType[] = [
     {
         title: "naruto shippuden",
-        src: "/assets/banner1.png",
+        path: "/src/assets/banner1.png",
         desc: "Naruto Shippuden, the sequel to the globally renowned Naruto series, is based on Masashi Kishimoto’s beloved manga. The series follows Naruto Uzumaki as a teenage ninja striving to protect his village and achieve his dream of becoming Hokage, the leader of the Hidden Leaf Village. With over 250 million copies of the Naruto manga sold worldwide and Naruto Shippuden running for over a decade, the series has become a cornerstone of anime culture praised for its action, complex characters, and emotional depth. Naruto Shippuden’s themes of redemption, sacrifice, and perseverance explore how the bonds of friendship can defeat the most powerful enemies. Naruto Shippuden ran for 22 seasons, from 2007 to 2017, bringing Naruto’s journey to its epic conclusion. Early seasons focus on the development of the Akatsuki storyline, and as the series progresses, larger threats emerge, including some of the most powerful foes in the ninja world. The final seasons of Naruto Shippuden bring closure to long-running storylines that define Naruto’s legacy as a hero in one of the most influential and enduring anime series of all time.",
         link: "https://www.crunchyroll.com/series/GYQ4MW246/naruto-shippuden",
         platform: "crunchyroll",
@@ -186,7 +186,7 @@ const bannerSlider: BannerType[] = [
     },
     {
         title: "demon slayer",
-        src: "/assets/banner2.png",
+        path: "/src/assets/banner2.png",
         desc: "It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.",
         link: "https://www.crunchyroll.com/series/GY5P48XEY/demon-slayer-kimetsu-no-yaiba",
         platform: "crunchyroll",
@@ -194,7 +194,7 @@ const bannerSlider: BannerType[] = [
     },
     {
         title: "sakamoto days",
-        src: "/assets/banner3.jpg",
+        path: "/src/assets/banner3.jpg",
         desc: "Once the greatest hitman of all, Taro Sakamoto retired in the name of love. But when his past catches up, he must fight to protect his beloved family.",
         link: "https://www.netflix.com/in/title/81663325#episodes",
         platform: "netflix",
@@ -255,12 +255,12 @@ const HeroBanner = () => {
                 <>
                     <AnimatePresence mode="wait">
                         <motion.img
-                            key={banner.src}
+                            key={banner.path}
                             variants={bannerImageVariants}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            src={banner.src}
+                            src={banner.path}
                             alt={banner.title}
                             className="w-full h-full object-cover absolute inset-0 "
                         />
